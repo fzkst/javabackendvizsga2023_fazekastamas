@@ -1,16 +1,43 @@
 package varnavizsga.jjbvizsga.feladat3;
 
+import varnavizsga.jjbvizsga.feladat2.Book;
+
+import java.util.ArrayList;
+
 public class BookManager {
+    private ArrayList<Book> bookList = new ArrayList<>();
     public void addBook(int id, String author, String title, int price, boolean onSale) {
-        throw new UnsupportedOperationException();
+        bookList.add(new Book(id, author, title, price, onSale));
     }
     public int getBookCount() {
-        throw new UnsupportedOperationException();
+        return bookList.size();
     }
     public long getTotalPrice() {
-        throw new UnsupportedOperationException();
+        long sum = 0;
+        for (Book book: bookList) {
+            sum += book.getPrice();
+        }
+        return sum;
     }
     public int countOnSale() {
-        throw new UnsupportedOperationException();
+        int akciosKonyvek = 0;
+        for (Book book: bookList) {
+            if (book.isOnSale()){
+                akciosKonyvek++;
+            }
+        }
+        return akciosKonyvek;
+    }
+
+    public String getCheapest(){
+        int cheapestPrice = 1000000000;
+        String cheapestBook = "";
+        for (Book book: bookList) {
+            if (book.getPrice() < cheapestPrice){
+                cheapestPrice = book.getPrice();
+                cheapestBook = book.getTitle();
+            }
+        }
+        return cheapestBook;
     }
 }
